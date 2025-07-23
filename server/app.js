@@ -68,4 +68,8 @@ app.get('/api/paste/:id', async (req, res) => {
   res.json(paste);
 });
 
+app.get('/', async (req, res) => {
+  res.send("pasteBin API Working")
+});
+
 app.listen(5000, () => console.log('Server running on http://localhost:5000'));
