@@ -15,7 +15,8 @@ app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/pastebin', {
+// mongoose.connect('mongodb://localhost:27017/pastebin', {
+mongoose.connect('mongodb+srv://paras:ebarRSrXstptuiMA@cluster.qu4yv9d.mongodb.net/', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
