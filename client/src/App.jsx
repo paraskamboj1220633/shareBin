@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-const API_URL = 'http://localhost:5000/api/paste';
+// const API_URL = 'http://localhost:5000/api/paste';
+const API_URL = 'https://pastebin-jqam.onrender.com/api/paste';
 
 export default function App() {
   const [text, setText] = useState('');
