@@ -1,0 +1,19 @@
+# dependencies
+/node_modules
+
+# production
+/dist
+
+# environment variables
+.env
+.env.*.local
+
+# local development server cache
+.vite
+
+# logs and debug
+*.log
+
+# OS & IDE
+.DS_Store
+.vscode/
