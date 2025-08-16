@@ -1,5 +1,4 @@
 // src/api/api.js
-import axios from 'axios';
 
 const API_BASE = 'http://localhost:3003/api/paste';
 
@@ -9,14 +8,28 @@ export const createPaste = async (text, file) => {
   if (text) formData.append('content', text);
   formData.append('contentType', 'text/plain');
 
-  const { data } = await axios.post(API_BASE, formData, {
-    headers: { 'Content-Type': 'multipart/form-data' },
+  const response = await fetch(API_BASE, {
+    method: 'POST',
+    body: formData,
   });
+
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const error = new Error(data?.error || 'Request failed');
+    error.response = { data };
+    throw error;
+  }
 
   return data;
 };
 
 export const fetchPaste = async (pasteId) => {
-  const { data } = await axios.get(`${API_BASE}/${pasteId}`);
+  const response = await fetch(`${API_BASE}/${pasteId}`);
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const error = new Error(data?.error || 'Request failed');
+    error.response = { data };
+    throw error;
+  }
   return data;
 };

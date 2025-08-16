@@ -4,18 +4,27 @@ const { nanoid } = require('nanoid');
 const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
+const compression = require('compression');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3003;
 const DB_URL = process.env.DB_URL;
 
+// Security/perf headers
+app.disable('x-powered-by');
+
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(compression());
 
 // Serve uploaded files
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
+  maxAge: '30d',
+  immutable: true,
+  etag: true,
+}));
 
 // MongoDB connection
 mongoose.connect(DB_URL)
